@@ -21,6 +21,12 @@ const MainApp: React.FC<MainAppProps> = ({ user, onLogout }) => {
   const [persona, setPersona] = useState<'ugc' | 'influencer' | 'viral' | 'seller' | null>(null);
   const [isLoadingPersona, setIsLoadingPersona] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [selectedCard, setSelectedCard] = useState<any>(null);
+
+  const handleCardSelect = (card: any) => {
+    setSelectedCard(card);
+    console.log('Card selecionado:', card);
+  };
 
   useEffect(() => {
     // Verificar se usuário tem persona selecionada
@@ -181,7 +187,7 @@ const MainApp: React.FC<MainAppProps> = ({ user, onLogout }) => {
         <ProgressBar />
 
         {/* Views */}
-        {currentView === 'home' && persona && <TrackGrid persona={persona} />}
+        {currentView === 'home' && persona && <TrackGrid onCardSelect={handleCardSelect} />}
         {currentView === 'metrics' && <MetricsDashboard />}
         {currentView === 'strategies' && <StrategiesDashboard />}
       </main>
